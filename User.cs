@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ut.businesslogic.user
 {
-
+    // User Class
     public class User
     {
         public static Dictionary<string, string> Users = new Dictionary<string, string>();

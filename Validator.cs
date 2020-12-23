@@ -9,6 +9,7 @@ namespace ut.businesslogic.user
         public static string passwordPattern1 = @"\b[a-zA-Z0-9]{6,50}\b";
         public static string passwordPattern2 = @"^(\w*(\d+[a-zA-Z]|[a-zA-Z]+\d)\w*)+$";
 
+
         public bool IsValidFields(string username,string password)
         {
             
