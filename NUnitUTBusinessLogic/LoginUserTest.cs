@@ -18,7 +18,6 @@ namespace ut.businesslogic.tests.createuser
         }
 
 
-
         [Test]
         public void ShouldLoginFailByInvalidUserCredentials(string username, string password)
         {
