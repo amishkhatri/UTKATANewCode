@@ -6,6 +6,7 @@ namespace ut.businesslogic.tests.createuser
     [TestFixture("amish", "test123")]
     [TestFixture("amish123", "test123")]
     [TestFixture("", "")]
+    [TestFixture("amish", "testtt")]
     public class CreateUserTest
     {
 
@@ -25,8 +26,8 @@ namespace ut.businesslogic.tests.createuser
             {
                 // --- Arrange -----
                 var user = new User();
-                user.UserName = "amish";
-                user.Password = "test123";
+                user.UserName = this.Testusername;
+                user.Password = this.Testpassword;
 
                 /// --- Act -----
                 var result = user.Add();
@@ -48,14 +49,14 @@ namespace ut.businesslogic.tests.createuser
             {
                 // --- Arrange -----
                 var user = new User();
-                user.UserName = "amish123";
-                user.Password = "test123";
+                user.UserName = this.Testusername;
+                user.Password = this.Testpassword;
 
                 /// --- Act -----
                 var result = user.Add();
 
                 /// --- Assert -----
-                Assert.AreEqual("Only characters are allowed in the user name field.", user.Message);
+                Assert.AreEqual("Please enter password with minimum 6 alphanumeric characters.", user.Message);
             }
             catch (System.Exception ex)
             {
@@ -63,7 +64,6 @@ namespace ut.businesslogic.tests.createuser
             }
 
         }
-
 
         [Test]
         public void ShouldReturnFailWhenUserFieldsEmpty()
@@ -87,6 +87,31 @@ namespace ut.businesslogic.tests.createuser
             }
 
         }
+
+        [Test]
+        public void ShouldFailtoAddUserWhenPasswordIsWeak()
+        {
+            try
+            {
+                // --- Arrange -----
+                var user = new User();
+                user.UserName = this.Testusername;
+                user.Password = this.Testpassword;
+
+                /// --- Act -----
+                var result = user.Add();
+
+                /// --- Assert -----
+                Assert.AreEqual("Please enter password with minimum 6 alphanumeric characters.", user.Message);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
 
     }
 }

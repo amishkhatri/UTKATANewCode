@@ -69,10 +69,15 @@ namespace ut.businesslogic.user
                 else
                     if (validator.IsUserNameValid(this.UserName))
                     {
-                        Users.Add(this.UserName,this.Password);
-                        this.Message = "The user: " + this.UserName + " successfully added.";
-                        result = true;
-                    }
+                        if (validator.IsPasswordValid(this.Password))
+                        {
+                            Users.Add(this.UserName, this.Password);
+                            this.Message = "The user: " + this.UserName + " successfully added.";
+                            result = true;
+                        }
+                        else
+                            this.Message = "Please enter password with minimum 6 alphanumeric characters.";
+                }
                     else
                         this.Message = "Only characters are allowed in the user name field.";
              
