@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ut.businesslogic.user
@@ -37,6 +38,24 @@ namespace ut.businesslogic.user
         #endregion
 
         #region Methods
+        public bool Login()
+        {
+            bool result = false;
+
+            try
+            {
+                //result = String.Compare( Users[this.UserName],(this.Password.Trim()),false) ? true : false;
+                result = Users.Where(x => x.Key == this.UserName.Trim()).Select(x => this.Password.Trim()).Count() >0 ? true : false;
+
+                this.Message = result == true ? "The user logged in successfully." : "User login failed."; 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+
+        }
 
         //Add a new user with user name only characters
         public bool Add()
