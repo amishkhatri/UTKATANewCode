@@ -10,6 +10,7 @@ namespace ut.businesslogic.tests.createuser
     public class CreateUserTest
     {
 
+
         private string Testusername;
         private string Testpassword;
 

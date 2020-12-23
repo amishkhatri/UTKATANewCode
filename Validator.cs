@@ -32,6 +32,7 @@ namespace ut.businesslogic.user
             bool regExPass = false;
             bool result = false;
 
+
             try
             {
                 regExPass = System.Text.RegularExpressions.Regex.IsMatch(inputpassword, passwordPattern1);
