@@ -3,31 +3,18 @@ using ut.businesslogic.user;
 
 namespace ut.businesslogic.tests.createuser
 {
-    [TestFixture("amish", "test123")]
-    [TestFixture("amish", "test12345")]
+    
     public class LoginUserTest
     {
 
-        private string Testusername;
-        private string Testpassword;
-
-        public LoginUserTest(string testUserName, string testPassword)
-        {
-            Testusername = testUserName;
-            Testpassword = testPassword;
-        }
-
-
         [Test]
-        public void ShouldLoginFailByInvalidUserCredentials(string username, string password)
+        public void ShouldLoginFailByInvalidUserCredentials()
         {
 
-            try
-            {
                 // --- Arrange -----
                 var user = new User();
-                user.UserName = this.Testusername;
-                user.Password = this.Testpassword;
+                user.UserName = "amish";
+                user.Password = "test123";
 
                 /// --- Act -----
                 var IsUserValid = user.Login();
@@ -35,11 +22,6 @@ namespace ut.businesslogic.tests.createuser
                 /// --- Assert -----
                 Assert.AreEqual("User login failed.", user.Message);
 
-            }
-            catch (System.Exception ex)
-            {
-                throw ex;
-            }
 
         }
 
@@ -47,12 +29,10 @@ namespace ut.businesslogic.tests.createuser
         [Test]
         public void ShouldLoginSuccessfullywithValidLogin()
         {
-            try
-            {
                 // --- Arrange -----
                 var user = new User();
-                user.UserName = this.Testusername;
-                user.Password = this.Testpassword;
+                user.UserName = "amish";
+                user.Password = "test12345";
 
                 /// --- Act -----
                 var result = user.Add();
@@ -70,11 +50,6 @@ namespace ut.businesslogic.tests.createuser
                 }
                     
 
-            }            
-            catch(System.Exception ex)
-            {
-                throw ex;
-            }
 
         }
 

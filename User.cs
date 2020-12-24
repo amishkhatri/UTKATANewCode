@@ -38,13 +38,13 @@ namespace ut.businesslogic.user
         #endregion
 
         #region Methods
+        //Login user by validating from Users Dictionary 
         public bool Login()
         {
             bool result = false;
 
             try
             {
-                //result = String.Compare( Users[this.UserName],(this.Password.Trim()),false) ? true : false;
                 result = Users.Where(x => x.Key == this.UserName.Trim()).Select(x => this.Password.Trim()).Count() >0 ? true : false;
 
                 this.Message = result == true ? "The user logged in successfully." : "User login failed."; 
@@ -57,7 +57,7 @@ namespace ut.businesslogic.user
 
         }
 
-        //Add a new user with user name only characters
+        //Add a new user with user name only characters with password strength
         public bool Add()
         {
             bool result = false;
