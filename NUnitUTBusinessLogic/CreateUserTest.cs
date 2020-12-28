@@ -9,6 +9,8 @@ namespace ut.businesslogic.tests.createuser
         [Test]
         public void ShouldReturnPassWhenUserAddedSuccessfully()
         {
+
+
                 // --- Arrange -----
                 var user = new User();
                 user.UserName = "amish";
