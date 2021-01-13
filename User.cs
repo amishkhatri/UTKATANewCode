@@ -71,6 +71,7 @@ namespace ut.businesslogic.user
         public bool Update(string newpassword)
         {
             bool result = false;
+            
             try
             {
                 result = GetUser.Where(x => x.Key == this.UserName.Trim()).Select(x => this.Password.Trim()).Count() > 0 ? true : false;
