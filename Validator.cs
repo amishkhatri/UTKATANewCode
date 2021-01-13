@@ -16,8 +16,9 @@ namespace ut.businesslogic.user
 
             try
             {
-                result = ((!string.IsNullOrEmpty(username)) && (!string.IsNullOrEmpty(password))) ? true : false;
-                
+                // result = ((!string.IsNullOrEmpty(username)) && (!string.IsNullOrEmpty(password))) ? true : false;
+                result = (!string.IsNullOrEmpty(username));
+
             }
             catch (System.Exception ex)
             {
@@ -32,6 +33,7 @@ namespace ut.businesslogic.user
             bool regExPass = false;
             bool result = false;
 
+            //if (string.IsNullOrEmpty(inputpassword)) return true;
 
             try
             {

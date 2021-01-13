@@ -8,7 +8,8 @@ namespace ut.businesslogic.user
     // User Class
     public class User
     {
-        public static Dictionary<string, string> Users = new Dictionary<string, string>();
+        // public static Dictionary<string, string> Users = new Dictionary<string, string>();
+        private Dictionary<string, string> _user = new Dictionary<string, string>();
         private static Validator validator = new Validator();
 
         #region Properties  
@@ -37,6 +38,14 @@ namespace ut.businesslogic.user
         }
         #endregion
 
+        
+        public Dictionary<string, string> GetUser
+        {
+            get { return _user; }
+            set { _user = value; }
+        }
+
+
         #region Methods
         //Login user by validating from Users Dictionary 
         public bool Login()
@@ -44,8 +53,9 @@ namespace ut.businesslogic.user
             bool result = false;
 
             try
-            {
-                result = Users.Where(x => x.Key == this.UserName.Trim()).Select(x => this.Password.Trim()).Count() >0 ? true : false;
+            { 
+
+                result = GetUser.Where(x => x.Key == this.UserName.Trim()).Select(x => this.Password.Trim()).Count() >0 ? true : false;
 
                 this.Message = result == true ? "The user logged in successfully." : "User login failed."; 
             }
@@ -55,6 +65,31 @@ namespace ut.businesslogic.user
             }
             return result;
 
+        }
+
+
+        public bool Update(string newpassword)
+        {
+            bool result = false;
+            try
+            {
+                result = GetUser.Where(x => x.Key == this.UserName.Trim()).Select(x => this.Password.Trim()).Count() > 0 ? true : false;
+                                                
+                if (result)
+                {
+                    GetUser[this.UserName] = newpassword;
+                    this.Message = "Password change successful";
+                }
+                    
+                
+            }
+            catch (System.Exception ex)
+            {
+                result = false;
+                throw ex;
+            }
+
+            return result;
         }
 
         //Add a new user with user name only characters with password strength
@@ -71,9 +106,10 @@ namespace ut.businesslogic.user
                     {
                         if (validator.IsPasswordValid(this.Password))
                         {
-                            Users.Add(this.UserName, this.Password);
-                            this.Message = "The user: " + this.UserName + " successfully added.";
-                            result = true;
+                            GetUser.Add(this.UserName, this.Password);
+                        this.Message = "User creation successful";
+                        //this.Message = "The user: " + this.UserName + " with password : " + this.Password + " successfully added.";
+                        result = true;
                         }
                         else
                             this.Message = "Please enter password with minimum 6 alphanumeric characters.";
@@ -83,6 +119,40 @@ namespace ut.businesslogic.user
              
             }
             catch(Exception ex)
+            {
+                throw ex;
+            }
+            return result;
+        }
+
+
+        public bool Create()
+        {
+            bool result = false;
+
+            this.Password = string.IsNullOrEmpty(this.Password)? "test1234" : this.Password;
+
+            try
+            {
+                if (!(validator.IsValidFields(this.UserName, this.Password)))
+                    this.Message = "All fields are mandatory.";
+                else
+                    if (validator.IsUserNameValid(this.UserName))
+                {
+                    if (validator.IsPasswordValid(this.Password))
+                    {
+                        GetUser.Add(this.UserName, this.Password);
+                        this.Message = "User creation successful";                        
+                        result = true;
+                    }
+                    else
+                        this.Message = "Please enter password with minimum 6 alphanumeric characters.";
+                }
+                else
+                    this.Message = "Only characters are allowed in the user name field.";
+
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
